@@ -33,7 +33,9 @@ addOne(1) //=> 2
 addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
-
+function addOne(num) {
+  return num + 1;
+}
 
 
 
@@ -56,7 +58,11 @@ addTwoNumbers(0, 0) //=> 0
 addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
-
+function addTwoNumbers(num1, num2) {
+  if (isNaN(num1, num2)) {
+    return NaN;
+  } else return num1 + num2;
+}
 
 
 
@@ -80,7 +86,9 @@ sumNumbers([]) //=> 0
 -----------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
 
-
+function sumNumbers(arr) {
+  return arr.reduce((a, b) => a + b, 0);
+}
 
 
 
@@ -103,8 +111,15 @@ add(7,-12) //=> -5
 -----------------------------------------------------------------*/
 // Your solution for 04-addList here:
 
-
-
+function addList() {
+  sum = 0;
+  if(arguments) {
+    for (var i=0; i < arguments.length; i++) {
+      sum += arguments[i];
+    }
+    return sum;
+  }
+}
 
 
 /*-----------------------------------------------------------------
@@ -127,6 +142,19 @@ computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
 
+// function computeRemainder(n1, n2) {
+//   if (n2 === 0) {
+//    return n1 / n2 
+//   }
+//   quotient = n1 / n2
+//   remainder = n1 - (quotient * n2)
+//   return remainder 
+// }
+
+function computeRemainder(n1, n2) {
+  if(n2 === 0) return Infinity;
+  return n1 % n2;
+}
 
 
 
@@ -138,8 +166,10 @@ Difficulty: basic
 
 Prompt:
 
-- Write a function called range that accepts two integers as arguments and returns an array of integers starting with the first argument up to one less than the second argument.
-- The range function must be called with the first argument less than or equal to the second argument, otherwise return the string "First argument must be less than second".
+- Write a function called range that accepts two integers as arguments and returns an array of 
+  integers starting with the first argument up to one less than the second argument.
+- The range function must be called with the first argument less than or equal to the second 
+  argument, otherwise return the string "First argument must be less than second".
 
 Examples:
 
@@ -150,7 +180,15 @@ range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------*/
 // Your solution for 06-range here:
 
-
+function range(n1, n2) {
+  if(n1 > n2) return 'First argument must be less than second'
+  else if(n1 === n2) return []
+  else {
+    const list = Array(n2 - n1 + 1).fill().map((_, idx) => n1 + idx)
+    console.log(list);
+    return list
+  }
+}
 
 
 
@@ -161,7 +199,9 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function called reverseUpcaseString that accepts a single string argument, then returns the string with its characters in reverse orderand converts all characters to uppercase.
+- Write a function called reverseUpcaseString that accepts a single string argument, 
+  then returns the string with its characters in reverse orderand converts all characters
+  to uppercase.
 
 Examples:
 
@@ -169,7 +209,9 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 -----------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
 
-
+function reverseUpcaseString(str) {
+  return str.split('').reverse().join('').toUpperCase();
+}
 
 
 
@@ -180,7 +222,8 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function called removeEnds that accepts a single string argument, then returns the a string with the first and last characters removed.
+- Write a function called removeEnds that accepts a single string argument, 
+  then returns the string with the first and last characters removed.
 - If the length of the string argument is less than 3, return an empty string.
 
 Examples:
@@ -190,6 +233,10 @@ removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
 
+function removeEnds(str) {
+  if((str).length < 3) return '';
+  return str.slice(1, -1);
+}
 
 
 
@@ -201,10 +248,12 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function named charCount that accepts a single string argument and returns an object that represents the count of each character in the string.
-- The returned object should have keys that represent the character with its value set to the how many times the character appears in the string argument.
+- Write a function named charCount that accepts a single string argument and returns
+  an object that represents the count of each character in the string.
+- The returned object should have keys that represent the character with its value 
+  set to how many times the character appears in the string argument.
 - Upper and lower case characters should be counted separately.
-- Space characters should be count too.
+- Space characters should be counted too.
 
 Examples:
 
@@ -213,6 +262,17 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
+function charCount(str) {
+  return str.split('').reduce(function(accumulator, char) {
+    if(accumulator[char] !== undefined) {
+      accumulator[char]++;
+      return accumulator
+    } else {
+      accumulator[char] = 1;
+      return accumulator
+    }
+  }, {});
+}
 
 
 
@@ -226,10 +286,13 @@ Prompt:
 
 - Write a function called formatWithPadding that accepts three arguments:
   - A numeric argument (an integer) representing the number to format.
-  - A string argument (a single character) representing the character used to "pad" the returned string to a minimum length.
+  - A string argument (a single character) representing the character used to "pad" the returned string 
+    to a minimum length.
   - Another numeric argument (an integer) representing the length to "pad" the returned string to.
-- The function should return the integer as a string, "left padded" to the length of the 3rd arg using the character provided in the 2nd arg.
-- If the length of the integer converted to a string is equal or greater than the 3rd argument, no padding is needed - just return the integer as a string.
+- The function should return the integer as a string, "left padded" to the length of the 3rd arg using 
+  the character provided in the 2nd arg.
+- If the length of the integer converted to a string is equal or greater than the 3rd argument, 
+  no padding is needed - just return the integer as a string.
 
 Examples:
 
@@ -238,7 +301,11 @@ formatWithPadding(42, '*', 10); //=> "********42"
 formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
-
+function formatWithPadding(int, str, maxLength) {
+  const intStr = String(int);
+  if(intStr.length >= maxLength) return intStr;
+  return str.repeat(maxLength - intStr.length) + intStr;
+}
 
 
 
@@ -250,9 +317,13 @@ Difficulty: Intermediate
 
 Prompt:
 
-- Write a function called isPalindrome that accepts a single string argument, then returns true or false depending upon whether or not the string is a palindrome.
+- Write a function called isPalindrome that accepts a single string argument, 
+  then returns true or false depending upon whether or not the string is a palindrome.
+
 - A palindrome is a word or phrase that are the same forward or backward.
+
 - Casing and spaces are not included when considering whether or not a string is a palindrome.
+
 - If the length of the string is 0 or 1, return true.
 
 Examples:
@@ -263,7 +334,11 @@ isPalindrome('A nut for a jar of tuna'); //=> true
 isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
-
+function isPalindrome(str) {
+  if(str.length <= 1) true
+  str = str.replace(/ /g, '').toLowerCase();
+  return str === str.split('').reverse().join('');
+}
 
 
 
@@ -275,10 +350,15 @@ Difficulty: Intermediate
 
 Prompt:
 
-In information theory, the hamming distance refers to the count of the differences between two strings of equal length.  It is used in computer science for such things as implementing "fuzzy search"  capability.
+In information theory, the hamming distance refers to the count of the differences between 
+two strings of equal length.  It is used in computer science for such things as implementing 
+"fuzzy search"  capability.
 
 - Write a function named hammingDistance that accepts two arguments which are both strings of equal length.
-- The function should return the count of the symbols (characters, numbers, etc.) at the same position within each string that are different.
+
+- The function should return the count of the symbols (characters, numbers, etc.) at the same position 
+  within each string that are different.
+
 - If the strings are not of the same length, the function should return NaN.
 
 Examples:
@@ -290,6 +370,14 @@ hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
+function hammingDistance(str1, str2) {
+  if(str1.length !== str2.length) return NaN;
+
+  return str1.split('').reduce((acc, char, idx) => {
+    if(char !== str2[idx]) acc += 1
+    return acc;
+  }, 0)
+}
 
 
 
@@ -302,7 +390,11 @@ Difficulty: Intermediate
 Prompt:
 
 - Write a function called mumble that accepts a single string argument.
-- The function should return a string that has each character repeated the number of times according to its position within the string arg.  In addition, each repeated section of characters should be separated by a hyphen (-).
+
+- The function should return a string that has each character repeated the number of times
+  according to its position within the string arg.  In addition, each repeated section of 
+  characters should be separated by a hyphen (-).
+
 - Examples describe it best..
 
 Examples:
@@ -314,6 +406,16 @@ mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
 
+function mumble(str) {
+  return str.split('').reduce((acc, char, idx) => {
+    if(idx === str.length - 1) {
+      acc += char.repeat(idx + 1)
+    } else {
+      acc += char.repeat(idx + 1) + '-'
+    }
+    return acc
+  }, '');
+}
 
 
 
