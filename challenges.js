@@ -184,8 +184,7 @@ function range(n1, n2) {
   if(n1 > n2) return 'First argument must be less than second'
   else if(n1 === n2) return []
   else {
-    const list = Array(n2 - n1 + 1).fill().map((_, idx) => n1 + idx)
-    console.log(list);
+    const list = Array(n2 - n1).fill().map((_, idx) => n1 + idx)
     return list
   }
 }
