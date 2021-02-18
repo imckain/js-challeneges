@@ -476,7 +476,7 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c:
 
 function mergeObjects(main, ...objects) {
   objects.forEach(function(object) {
-    for(var key in object) {
+    for(let key in object) {
       main[key] = object[key]
     }
   });
@@ -520,8 +520,8 @@ findHighestPriced([
 // Your solution for 16-findHighestPriced here:
 
 function findHighestPriced(arr) {
-  var price = 0;
-  var resObj;
+  let price = 0;
+  let resObj;
   arr.forEach(function(obj) {
     if(obj.price > price) {
       price = obj.price;
@@ -540,11 +540,15 @@ Difficulty:  Intermediate
 
 Prompt:
 
-The goal is of this challenge is to write a function that performs the functionality of JavaScript's Array.prototype.map method.
+The goal is of this challenge is to write a function that performs the functionality of JavaScript's 
+Array.prototype.map method.
 
 - Write a function named mapArray that accepts two arguments: a single array and a callback function.
 - The mapArray function should return a new array of the same length as the array argument.
-- The mapArray function should iterate over each element in the array (first arg).  For each iteration, invoke the callback function (2nd arg), passing to it as arguments, the current element and its index.  Whatever is returned by the callback function should be included in the new array at the index of the current iteration.
+- The mapArray function should iterate over each element in the array (first arg).  
+  For each iteration, invoke the callback function (2nd arg), passing to it as arguments, 
+  the current element and its index.  Whatever is returned by the callback function should be 
+  included in the new array at the index of the current iteration.
 
 Examples:
 
@@ -560,7 +564,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
 
-
+function mapArray(arr, cb) {
+  let newArr = [];
+  arr.forEach(function(i, idx) {
+    newArr.push( cb(i, idx) );
+  });
+  return newArr;
+}
 
 
 
