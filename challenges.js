@@ -715,10 +715,17 @@ Difficulty: Intermediate
 
 Prompt:
 
-Now that you have solved the last challenge of determining if a whole number is prime, let's expand upon that concept to...
-- Write a function named primeFactors that accepts a whole number greater than one (1) as an argument and returns an array of that argument's prime factors.
-- The prime factors of a whole number are the prime numbers that, when multiplied together, equals the whole number.
-- If the argument provided is not greater than 1, or not a whole number, then primeFactors should return an empty array.
+Now that you have solved the last challenge of determining if a whole number 
+is prime, let's expand upon that concept to...
+- Write a function named primeFactors that accepts a whole number greater 
+  than one (1) as an argument and returns an array of that argument's 
+  prime factors.
+
+- The prime factors of a whole number are the prime numbers that, 
+  when multiplied together, equals the whole number.
+
+- If the argument provided is not greater than 1, or not a whole number, 
+  then primeFactors should return an empty array.
 
 Examples:
 
@@ -732,6 +739,36 @@ primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
 
+function primeFactors(int) {
+  let nums = []
+  if(int < 2 || !Number.isInteger(int)) return nums
+  
+  function isPrime(int) {
+    if(int < 2 || !Number.isInteger(int)) {
+      return false
+    }
+    for(let i = 2; i <= int / 2; i++) {
+      if(Number.isInteger(int / i)) {
+        return false
+      }
+    }
+    return true
+  }
+
+  let prime = 2;
+  while(!isPrime(int)) {
+    if(Number.isInteger(int / prime)) {
+      nums.push(prime);
+      int = int / prime;
+    } else {
+      prime++;
+      while(!isPrime(prime)) prime++;
+    }
+  }
+
+  nums.push(int);
+  return nums;
+}
 
 
 
